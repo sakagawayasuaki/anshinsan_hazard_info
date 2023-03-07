@@ -69,7 +69,7 @@ if search_btn:
             flag_not_empty =True
     if flag_not_empty:
         # Controlから返されたデータフレームを格納
-        st.session_state.df_hazard = pd.DataFrame(data=[],index=['洪水','津波','高潮','急傾斜地の崩壊','土石流','地すべり','地震'])
+        st.session_state.df_hazard = pd.DataFrame(data=[],index=['洪水：浸水深さ','津波：浸水深さ','高潮：浸水深さ','急傾斜地の崩壊','土石流','地すべり','地震：確率最大震度'])
         st.session_state.radar_list =[]
         st.session_state.latlng_list = []
         st.session_state.jishin_list =[]
