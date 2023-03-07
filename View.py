@@ -260,7 +260,7 @@ if st.session_state.click:
         if propertyname[i]:
             propname+="propertyname="+propertyname[i]+"&"
         else: propname+="propertyname= &"
-    copy_url = "http://localhost:8501/?{0}{1}{2}".format(pref,city,propname)
+    copy_url = "https://sakagawayasuaki-anshinsan-hazard-info-view-gs5r95.streamlit.app/?{0}{1}{2}".format(pref,city,propname)
     st.code(copy_url, language='cshtml')
 # 災害情報一覧
 st.write("取得できる災害情報一覧")
