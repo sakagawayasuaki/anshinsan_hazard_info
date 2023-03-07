@@ -1,11 +1,6 @@
 import Model_ANSHIN as mod
 import pandas as pd
-from dotenv import load_dotenv
-import os
 import numpy as np
-
-load_dotenv()
-MAP_API_KEY =  os.getenv('MY_MAP_API_KEY')
 
 
 def get_disaster_info_from_address(address, name):

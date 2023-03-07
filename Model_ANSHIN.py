@@ -1,6 +1,5 @@
 import googlemaps
-import os
-from dotenv import load_dotenv
+import streamlit as st
 from math import log
 from math import tan
 from math import pi
@@ -78,9 +77,8 @@ hazard_url_list = [ "01_flood_l2_shinsuishin_data/",
 # print(latlng_list) 
 # [34.70516, 135.5044608]
 def get_gmap_latlng(address, name):
-    load_dotenv()
-    MAP_API_KEY =  os.getenv('MY_MAP_API_KEY')
-    gm = googlemaps.Client(key=MAP_API_KEY)
+    KEY = st.secrets.GoogleMapApiKey.key
+    gm = googlemaps.Client(key=KEY)
     res = gm.geocode(address+' '+name)
     return [res[0]['geometry']['location']['lat'],res[0]['geometry']['location']['lng']]
 
