@@ -69,7 +69,7 @@ if search_btn:
             flag_not_empty =True
     if flag_not_empty:
         # Controlから返されたデータフレームを格納
-        st.session_state.df_hazard = pd.DataFrame(data=[],index=['洪水：浸水深さ','津波：浸水深さ','高潮：浸水深さ','急傾斜地の崩壊','土石流','地すべり','地震：確率最大震度'])
+        st.session_state.df_hazard = pd.DataFrame(data=[],index=['洪水','津波','高潮','急傾斜地の崩壊','土石流','地すべり','地震'])
         st.session_state.radar_list =[]
         st.session_state.latlng_list = []
         st.session_state.jishin_list =[]
@@ -79,7 +79,12 @@ if search_btn:
                 # Controlの関数を用いてデータ取得
                 df = con.get_disaster_info_from_address(option[i] + municipality[i], propertyname[i])
                 # テーブル用データフレーム作成
-                col_name = "({})".format(i+1) + propertyname[i]
+                if propertyname[i]:
+                    col_name = "({})".format(i+1) + propertyname[i]
+                elif municipality[i]:
+                    col_name = "({})".format(i+1) + municipality[i]
+                else:
+                    col_name = "({})".format(i+1) + option[i]
                 st.session_state.df_hazard[col_name] = df['ハザード情報']
                 # レーダーチャート用リスト作成
                 radar_list_tmp =[]
@@ -104,7 +109,8 @@ if search_btn:
         st.session_state.click = True
 
 if st.session_state.click:
-    #自然災害のハザード情報のデータフレーム表示
+    #自然災害のハザード情報のデータフレーム表示（インデックス変更）
+    st.session_state.df_hazard.rename(index={'洪水':'洪水：浸水深さ','津波':'津波：浸水深さ','高潮':'高潮：浸水深さ','地震':'地震：確率最大震度'}, inplace=True)
     st.write(st.session_state.df_hazard)
     
     #自然災害あんしんレベルレーダーチャートの表示
